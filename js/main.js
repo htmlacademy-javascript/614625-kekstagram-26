@@ -1,6 +1,4 @@
 function checkLength(string, maxLengh){
-  if( string.length<=maxLengh ){
-    return true;
-  }
-  return false;
+  return string.length <= maxLengh;
 }
+checkLength('asd',4);
