@@ -34,7 +34,7 @@ const NAME = [
 ];
 
 function createComments(count){
-  let comments = [];
+  const comments = [];
   let element;
   for (let index = 1; index <= count; index++) {
     element = {
@@ -43,22 +43,22 @@ function createComments(count){
       message: ARR_TXT[getRandomInt(0,6)],
       name: NAME[getRandomInt(0,9)],
     };
-  comments.push(element);
-  } 
+    comments.push(element);
+  }
   return comments;
 }
+let arrayData = [];
 
 function createData(count){
   let element;
-  let arrayData = [];
   for (let index = 1; index <= count; index++) {
     element = {
       id: index,
       url: `photos/${index}.jpg`,
-      description: "какое-то описание",
+      description: 'какое-то описание',
       likes: getRandomInt(15, 200),
-      comments: createComments(getRandomInt(1,3)),  
-    }
+      comments: createComments(getRandomInt(1,3)),
+    };
     arrayData.push(element);
   }
   return arrayData;
