@@ -1,7 +1,5 @@
 import {getRandomInt} from './util.js';
 
-const COUNT_OBJECT = 25;
-
 const TXT_MESSAGE = `Всё отлично!
 В целом всё неплохо.
 Но не всё.
@@ -38,10 +36,10 @@ function createComments(count){
   }
   return comments;
 }
-let arrayData = [];
 
 function createData(count){
   let element;
+  const arrayData = [];
   for (let index = 1; index <= count; index++) {
     element = {
       id: index,
@@ -55,6 +53,4 @@ function createData(count){
   return arrayData;
 }
 
-arrayData = createData(COUNT_OBJECT);
-
-export {arrayData};
+export {createComments, createData};
