@@ -1,15 +1,20 @@
-function createThumbnail (data) {
+function createThumbnails (data) {
   const templateFragment = document.querySelector('#picture').content;
   const templateThumbnail = templateFragment.querySelector('a');
   const fragment = document.createDocumentFragment();
-  for (let i=0; i < data.length; i++){
-    const element = templateThumbnail.cloneNode(true);
-    element.children[0].src = data[i].url;
-    element.children[1].children[1].innerText = data[i].likes;
-    element.children[1].children[0].innerText = data[i].comments.length;
+  data.forEach( (elementData) => {
+    const element = createThumbnail(templateThumbnail, elementData);
     fragment.appendChild(element);
-  }
+  });
   return fragment;
 }
 
-export {createThumbnail};
+function createThumbnail(templateThumbnail, elementData){
+  const element = templateThumbnail.cloneNode(true);
+  element.children[0].src = elementData.url;
+  element.children[1].children[1].innerText = elementData.likes;
+  element.children[1].children[0].innerText = elementData.comments.length;
+  return element;
+}
+
+export {createThumbnails};
