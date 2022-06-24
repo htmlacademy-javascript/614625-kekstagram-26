@@ -10,6 +10,7 @@ function showPopupData(data, evt){
 
   const socialComments = bigPicture.querySelector('.social__comments');
   socialComments.remove();
+  const listComments = document.createDocumentFragment();
 
   commentsLoader.classList.add('hidden');
   socCommentsCount.classList.add('hidden');
