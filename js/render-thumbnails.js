@@ -11,7 +11,9 @@ function createThumbnails (data) {
 
 function createThumbnail(templateThumbnail, elementData){
   const element = templateThumbnail.cloneNode(true);
+  element.classList.add(`dataImg-${elementData.id}`);
   element.children[0].src = elementData.url;
+  element.children[0].alt = elementData.description;
   element.children[1].children[1].innerText = elementData.likes;
   element.children[1].children[0].innerText = elementData.comments.length;
   return element;

@@ -10,10 +10,11 @@ const thumbnail = createThumbnails(arrayData);
 const pictures = document.querySelector('.pictures');
 pictures.append(thumbnail);
 
-const picture = document.querySelectorAll('.picture');
-for (let i = 0; i < picture.length;i++){
-  picture[i].addEventListener('click', function (event) {
-    event.preventDefault();
-    showPopupData(picture[i]);
-  });
+pictures.onclick = function (evt) {
+  if (evt.target.nodeName === 'IMG') {
+    const idData = + evt.target.offsetParent.classList[1].replace('dataImg-','');
+    //если мы кликнули мы должны вывести превент дефолт и передать данные в функцию по открытию модального окна
+    //вызываем функцию показа попап
+    showPopupData(arrayData[idData-1],evt);
+  }
 }
