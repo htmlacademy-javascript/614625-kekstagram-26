@@ -9,13 +9,32 @@ function showPopupData(data, evt){
   const commentsLoader = bigPicture.querySelector('.comments-loader');
 
   const socialComments = bigPicture.querySelector('.social__comments');
-  socialComments.remove();
+  const elemSocialComments = socialComments.querySelectorAll('li');
+
+  elemSocialComments.forEach(element => {
+    element.remove();
+  });
+
   const listComments = document.createDocumentFragment();
+  data.comments.forEach(element => {
+    const li = document.createElement('li');
+    const img = document.createElement('img');
+    const p = document.createElement('p');
+    li.classList.add('social__comment');
+    img.classList.add('social__picture');
+    img.src = element.avatar;
+    img.alt = element.name;
+    li.appendChild(img);
+    p.classList.add('social__text');
+    p.innerText = element.message;
+    li.appendChild(p);
+    listComments.appendChild(li);
+  });
+  socialComments.appendChild(listComments);
 
   commentsLoader.classList.add('hidden');
   socCommentsCount.classList.add('hidden');
   commentsCount.innerText = data.comments.length;
-  //Список комментариев под фотографией: комментарии должны вставляться в блок .social__comments. Разметка каждого комментария должна выглядеть так:
   socialCaption.innerText = data.description;
   likes.innerText = data.likes;
   bigPictureImg.alt = data.description;
