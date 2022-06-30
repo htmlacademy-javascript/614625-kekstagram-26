@@ -43,4 +43,8 @@ function showPopupData(data, evt){
   return;
 }
 
-export {showPopupData};
+function closePopupData(){
+  console.log('вызвали функцию');
+}
+
+export {showPopupData, closePopupData};
