@@ -11,12 +11,12 @@ function showPopupData(data, evt){
   const socialComments = bigPicture.querySelector('.social__comments');
   const elemSocialComments = socialComments.querySelectorAll('li');
 
-  elemSocialComments.forEach(element => {
+  elemSocialComments.forEach((element) => {
     element.remove();
   });
 
   const listComments = document.createDocumentFragment();
-  data.comments.forEach(element => {
+  data.comments.forEach((element) => {
     const li = document.createElement('li');
     const img = document.createElement('img');
     const p = document.createElement('p');
@@ -40,11 +40,11 @@ function showPopupData(data, evt){
   bigPictureImg.alt = data.description;
   bigPictureImg.src = data.url;
   bigPicture.classList.remove('hidden');
-  return;
 }
 
 function closePopupData(){
-  console.log('вызвали функцию');
+  const bigPicture = document.querySelector('.big-picture');
+  bigPicture.classList.add('hidden');
 }
 
 export {showPopupData, closePopupData};

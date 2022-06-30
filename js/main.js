@@ -12,24 +12,27 @@ const pictures = document.querySelector('.pictures');
 pictures.append(thumbnail);
 
 const buttonClose = document.querySelector('.big-picture__cancel');
+const body = document.querySelector('body');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    console.log('Esc');
+    body.classList.remove('modal-open');
     closePopupData();
   }
 };
 
 pictures.onclick = function (evt) {
   if (evt.target.nodeName === 'IMG') {
+    body.classList.add('modal-open');
     showPopupData(arrayData[evt.target.offsetParent.dataset.id],evt);
-
     document.addEventListener('keydown', onPopupEscKeydown);
   }
-}
+};
 
 buttonClose.addEventListener('click', () => {
-  //функция закрытия окна
+  body.classList.remove('modal-open');
   closePopupData();
+
+  document.removeEventListener('keydown', onPopupEscKeydown);
 });
