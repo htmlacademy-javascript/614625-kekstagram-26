@@ -9,8 +9,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
 }
 
-const isEscapeKey = (evt) => {
-  return evt.key === 'Escape';
-};
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {getRandomInt, isEscapeKey};
