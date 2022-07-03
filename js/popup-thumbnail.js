@@ -1,6 +1,8 @@
+const bigPicture = document.querySelector('.big-picture');
+const socialComments = bigPicture.querySelector('.social__comments');
+
 function showPopupData(data, evt){
   evt.preventDefault();
-  const bigPicture = document.querySelector('.big-picture');
   const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
   const likes = bigPicture.querySelector('.likes-count');
   const socialCaption = bigPicture.querySelector('.social__caption');
@@ -8,29 +10,9 @@ function showPopupData(data, evt){
   const socCommentsCount = bigPicture.querySelector('.social__comment-count');
   const commentsLoader = bigPicture.querySelector('.comments-loader');
 
-  const socialComments = bigPicture.querySelector('.social__comments');
-  const elemSocialComments = socialComments.querySelectorAll('li');
-
-  elemSocialComments.forEach((element) => {
-    element.remove();
-  });
-
-  const listComments = document.createDocumentFragment();
   data.comments.forEach((element) => {
-    const li = document.createElement('li');
-    const img = document.createElement('img');
-    const p = document.createElement('p');
-    li.classList.add('social__comment');
-    img.classList.add('social__picture');
-    img.src = element.avatar;
-    img.alt = element.name;
-    li.appendChild(img);
-    p.classList.add('social__text');
-    p.innerText = element.message;
-    li.appendChild(p);
-    listComments.appendChild(li);
+    createComment(element);
   });
-  socialComments.appendChild(listComments);
 
   commentsLoader.classList.add('hidden');
   socCommentsCount.classList.add('hidden');
@@ -43,8 +25,28 @@ function showPopupData(data, evt){
 }
 
 function closePopupData(){
-  const bigPicture = document.querySelector('.big-picture');
+  const elemSocialComments = socialComments.querySelectorAll('li');
+  elemSocialComments.forEach((element) => {
+    element.remove();
+  });
   bigPicture.classList.add('hidden');
+}
+
+function createComment(data){
+  const listComments = document.createDocumentFragment();
+  const li = document.createElement('li');
+  const img = document.createElement('img');
+  const p = document.createElement('p');
+  li.classList.add('social__comment');
+  img.classList.add('social__picture');
+  img.src = data.avatar;
+  img.alt = data.name;
+  li.appendChild(img);
+  p.classList.add('social__text');
+  p.innerText = data.message;
+  li.appendChild(p);
+  listComments.appendChild(li);
+  socialComments.appendChild(listComments);
 }
 
 export {showPopupData, closePopupData};

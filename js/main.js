@@ -1,6 +1,6 @@
 import * as data from './data.js';
 import {createThumbnails} from './render-thumbnails.js';
-import {showPopupData, closePopupData} from './popup-thumbnails.js';
+import {showPopupData, closePopupData} from './popup-thumbnail.js';
 import {isEscapeKey} from './util.js';
 
 const COUNT_OBJECT = 25;
