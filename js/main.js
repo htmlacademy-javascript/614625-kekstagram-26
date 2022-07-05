@@ -14,6 +14,7 @@ pictures.append(thumbnail);
 const buttonClose = document.querySelector('.big-picture__cancel');
 const body = document.querySelector('body');
 const buttonUpload = document.querySelector('.img-upload__input');
+const imgUpload = document.querySelector('.img-upload__overlay');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -40,11 +41,9 @@ buttonClose.addEventListener('click', () => {
 
 buttonUpload.addEventListener('change', (evt) => {
   console.log(evt.target.files[0]);
-  const imgFragment = document.createDocumentFragment();
-  const imgUpload = document.createElement('img');
-  imgUpload.src = buttonUpload.files[0].name;
-  imgFragment.appendChild(imgUpload);
-  buttonUpload.appendChild(imgFragment);
+  imgUpload.classList.remove('hidden');
+  const [file] = buttonUpload.files;
+  imgUpload.querySelector('img').src = URL.createObjectURL(file);
 });
 
 // var control = document.getElementById("your-files");
