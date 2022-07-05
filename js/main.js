@@ -25,7 +25,7 @@ const onPopupEscKeydown = (evt) => {
 pictures.onclick = function (evt) {
   if (evt.target.nodeName === 'IMG') {
     body.classList.add('modal-open');
-    showPopupData(arrayData[evt.target.offsetParent.dataset.id],evt);
+    showPopupData(arrayData[evt.target.offsetParent.dataset.id-1],evt);
     document.addEventListener('keydown', onPopupEscKeydown);
   }
 };
