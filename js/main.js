@@ -13,6 +13,7 @@ pictures.append(thumbnail);
 
 const buttonClose = document.querySelector('.big-picture__cancel');
 const body = document.querySelector('body');
+const buttonUpload = document.querySelector('.img-upload__input');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -36,3 +37,27 @@ buttonClose.addEventListener('click', () => {
 
   document.removeEventListener('keydown', onPopupEscKeydown);
 });
+
+buttonUpload.addEventListener('change', (evt) => {
+  console.log(evt.target.files[0]);
+  const imgFragment = document.createDocumentFragment();
+  const imgUpload = document.createElement('img');
+  imgUpload.src = buttonUpload.files[0].name;
+  imgFragment.appendChild(imgUpload);
+  buttonUpload.appendChild(imgFragment);
+});
+
+// var control = document.getElementById("your-files");
+// control.addEventListener("change", function(event) {
+//   // Когда происходит изменение элементов управления, значит появились новые файлы
+//   var i = 0,
+//     files = control.files,
+//     len = files.length;
+
+//   for (; i < len; i++) {
+//     console.log("Filename: " + files[i].name);
+//     console.log("Type: " + files[i].type);
+//     console.log("Size: " + files[i].size + " bytes");
+//   }
+
+// }, false);
