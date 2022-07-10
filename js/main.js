@@ -17,6 +17,7 @@ const buttonClose = document.querySelector('.big-picture__cancel');
 const body = document.querySelector('body');
 const buttonUpload = document.querySelector('.img-upload__input');
 const imgUpload = document.querySelector('.img-upload__overlay');
+const imgUploadCancel = document.querySelector('.img-upload__cancel');
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -26,6 +27,21 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
+const onCloseEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    body.classList.remove('modal-open');
+    imgUpload.classList.add('hidden');
+    buttonUpload.value = '';
+  }
+};
+
+const textHashtags = document.querySelector('.text__hashtags');
+
+textHashtags.addEventListener('focus', () => {
+  onCloseEscKeydown.stopPropagation();
+});
+
 pictures.onclick = function (evt) {
   if (evt.target.nodeName === 'IMG') {
     body.classList.add('modal-open');
@@ -34,40 +50,34 @@ pictures.onclick = function (evt) {
   }
 };
 
+imgUploadCancel.addEventListener('click', () => {
+  body.classList.remove('modal-open');
+  imgUpload.classList.add('hidden');
+  buttonUpload.value = '';
+  document.removeEventListener('keydown', onCloseEscKeydown);
+});
+
 buttonClose.addEventListener('click', () => {
   body.classList.remove('modal-open');
   closePopupData();
-
   document.removeEventListener('keydown', onPopupEscKeydown);
 });
 
-buttonUpload.addEventListener('change', (evt) => {
-
+buttonUpload.addEventListener('change', () => {
+  body.classList.add('modal-open');
   imgUpload.classList.remove('hidden');
   const [file] = buttonUpload.files;
-
   imgUpload.querySelector('img').src = URL.createObjectURL(file);
+  document.addEventListener('keydown', onCloseEscKeydown);
 });
 
 imgForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
+  //валидация хеш тега
   if (isValid) {
     console.log('все норм');
   } else {
     console.log('не норм');
   }
-})
-// var control = document.getElementById("your-files");
-// control.addEventListener("change", function(event) {
-//   // Когда происходит изменение элементов управления, значит появились новые файлы
-//     files = control.files,
-//     len = files.length;
-
-//   for (var i = 0; i < len; i++) {
-//     console.log("Filename: " + files[i].name);
-//     console.log("Type: " + files[i].type);
-//     console.log("Size: " + files[i].size + " bytes");
-//   }
-
-// }, false);
+});
