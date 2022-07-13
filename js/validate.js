@@ -18,10 +18,11 @@ function validateHashTeg(hashteg){
     if(hashteg[i]==='#'){
       return 'хеш-тег не может состоять только из одной решётки';
     }
-    if(hashteg.indexOf(hashteg[i]) !== -1){
-      return 'один и тот же хэш-тег не может быть использован дважды';
-    }
+    // if(hashteg.indexOf(hashteg[i]) !== -1){
+    //   return 'один и тот же хэш-тег не может быть использован дважды';
+    // }
   }
+  return true;
 }
 
 export {validateHashTeg};

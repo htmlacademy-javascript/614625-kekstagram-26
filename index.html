@@ -117,13 +117,16 @@
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper">
                     <input class="text__hashtags" name="hashtags" type="text" placeholder="#ХэшТег">
-                    <span>Ошибка</span>
                   </div>
                   <div class="img-upload__field-wrapper">
                     <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
                   </div>
                 </fieldset>
-
+                <fieldset class="img-upload__text img-upload__form--errors hidden">
+                  <div class="img-upload__field-wrapper">
+                    <p></p>
+                  </div>
+                </fieldset>
                 <!-- Кнопка для отправки данных на сервер -->
                 <button type="submit" class="img-upload__submit" id="upload-submit">Опубликовать</button>
               </div>

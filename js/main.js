@@ -68,13 +68,16 @@ buttonUpload.addEventListener('change', () => {
   document.addEventListener('keydown', onCloseEscKeydown);
 });
 
+const errorField = document.querySelector('.img-upload__form--errors');
+
 imgForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
-  validateHashTeg(textHashtags.value);
-  if (isValid) {
+  const isValidateHashTeg = validateHashTeg(textHashtags.value);
+  if (isValid && typeof isValidateHashTeg !== 'string') {
+    errorField.classList.add('hidden');
     console.log('все норм');
   } else {
-    console.log('не норм');
+    errorField.classList.remove('hidden');
   }
 });
