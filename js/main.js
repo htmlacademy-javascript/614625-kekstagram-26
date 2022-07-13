@@ -30,6 +30,10 @@ function onPopupEscKeydown(evt){
 
 function onCloseEscKeydown (evt){
   if (isEscapeKey(evt)) {
+    if(document.activeElement.className === 'text__hashtags' || document.activeElement.className === 'text__description'){
+      evt.stopPropagation();
+      return;
+    }
     evt.preventDefault();
     body.classList.remove('modal-open');
     imgUpload.classList.add('hidden');
