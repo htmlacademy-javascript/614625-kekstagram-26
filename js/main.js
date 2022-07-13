@@ -76,8 +76,14 @@ imgForm.addEventListener('submit', (evt) => {
   const isValidateHashTeg = validateHashTeg(textHashtags.value);
   if (isValid && typeof isValidateHashTeg !== 'string') {
     errorField.classList.add('hidden');
-    console.log('все норм');
+    imgForm.submit();
   } else {
     errorField.classList.remove('hidden');
+    if (!isValid){
+      errorField.querySelector('p').innerText = 'Изображение не загружено';
+    }
+    if (isValidateHashTeg){
+      errorField.querySelector('p').innerText = ` ${isValidateHashTeg}`;
+    }
   }
 });
