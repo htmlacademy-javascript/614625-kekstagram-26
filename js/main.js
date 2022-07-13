@@ -25,6 +25,7 @@ function onPopupEscKeydown(evt){
     evt.preventDefault();
     body.classList.remove('modal-open');
     closePopupData();
+    document.removeEventListener('keydown', onPopupEscKeydown);
   }
 }
 
@@ -38,6 +39,7 @@ function onCloseEscKeydown (evt){
     body.classList.remove('modal-open');
     imgUpload.classList.add('hidden');
     buttonUpload.value = '';
+    document.removeEventListener('keydown',onCloseEscKeydown);
   }
 }
 
