@@ -1,4 +1,4 @@
-function validateHashTeg(hashteg){
+function validateHashTag(hashteg){
   if (hashteg === ''){
     return true;
   }
@@ -20,11 +20,17 @@ function validateHashTeg(hashteg){
     if(hashteg[i]==='#'){
       return 'хеш-тег не может состоять только из одной решётки';
     }
-    if( (hashteg.indexOf(hashteg[i]) !== -1) && (hashteg.length>1)){
-      return 'один и тот же хэш-тег не может быть использован дважды';
+  }
+  if(hashteg.length>1){
+    for(let k=0;k<hashteg.length;k++){
+      for(let j=k+1;j<hashteg.length;j++){
+        if (hashteg[k] === hashteg[j]){
+          return 'один и тот же хэш-тег не может быть использован дважды';
+        }
+      }
     }
   }
   return true;
 }
 
-export {validateHashTeg};
+export {validateHashTag};

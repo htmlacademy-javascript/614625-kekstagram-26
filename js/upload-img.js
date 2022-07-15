@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {validateHashTeg} from './validate.js';
+import {validateHashTag} from './validate.js';
 
 const body = document.querySelector('body');
 const imgForm = document.querySelector('.img-upload__form');
@@ -42,8 +42,8 @@ buttonUpload.addEventListener('change', () => {
 imgForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
-  const isValidateHashTeg = validateHashTeg(textHashtags.value);
-  if (isValid && typeof isValidateHashTeg !== 'string') {
+  const isValidateHashTag = validateHashTag(textHashtags.value);
+  if (isValid && typeof isValidateHashTag !== 'string') {
     errorField.classList.add('hidden');
     imgForm.submit();
   } else {
@@ -51,8 +51,8 @@ imgForm.addEventListener('submit', (evt) => {
     if (!isValid){
       errorField.querySelector('p').innerText = 'Изображение не загружено';
     }
-    if (isValidateHashTeg){
-      errorField.querySelector('p').innerText = ` ${isValidateHashTeg}`;
+    if (isValidateHashTag){
+      errorField.querySelector('p').innerText = ` ${isValidateHashTag}`;
     }
   }
 });
