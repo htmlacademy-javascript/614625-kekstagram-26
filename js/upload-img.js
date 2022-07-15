@@ -41,18 +41,28 @@ buttonUpload.addEventListener('change', () => {
 
 imgForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  const isValid = pristine.validate();
-  const isValidateHashTag = validateHashTag(textHashtags.value);
-  if (isValid && typeof isValidateHashTag !== 'string') {
+  const errors = validateImgForm();
+  errorField.querySelector('p').innerText = '';
+  if (errors.length === 0) {
     errorField.classList.add('hidden');
     imgForm.submit();
   } else {
     errorField.classList.remove('hidden');
-    if (!isValid){
-      errorField.querySelector('p').innerText = 'Изображение не загружено';
-    }
-    if (isValidateHashTag){
-      errorField.querySelector('p').innerText = ` ${isValidateHashTag}`;
-    }
+    errors.forEach((element) => {
+      errorField.querySelector('p').innerText = errorField.querySelector('p').innerText + element;
+    });
   }
 });
+
+function validateImgForm(){
+  const isValid = pristine.validate();
+  const errors = [];
+  if (isValid ===false){
+    errors.push('Изображение не загружено ');
+  }
+  const isValidateHashTag = validateHashTag(textHashtags.value);
+  if (isValidateHashTag !== true){
+    errors.push(isValidateHashTag);
+  }
+  return errors;
+}
