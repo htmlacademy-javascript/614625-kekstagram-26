@@ -6,7 +6,7 @@ function validateHashTag(hashteg){
   if(hashteg.length>5){
     return 'нельзя указывать больше 5 хештегов';
   }
-  const allowCharacters = /(([a-zA-Z].*\d)|(\d.*[a-zA-Z]))/;
+  const allowCharacters = /(([a-zA-Z\d]))/;
   for (let i = 0; i<hashteg.length;i++){
     if(hashteg[i][0] !== '#'){
       return 'хэш-тег начинается с символа #';
