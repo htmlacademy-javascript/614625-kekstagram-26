@@ -1,5 +1,7 @@
 const bigPicture = document.querySelector('.big-picture');
 const socialComments = bigPicture.querySelector('.social__comments');
+const loaderComments = bigPicture.querySelector('.social__comments-loader');
+const commentsNumber = bigPicture.querySelector('.comments-number');
 
 function showPopupData(data, evt){
   evt.preventDefault();
@@ -8,7 +10,17 @@ function showPopupData(data, evt){
   const socialCaption = bigPicture.querySelector('.social__caption');
   const commentsCount = bigPicture.querySelector('.comments-count');
 
-  data.comments.forEach((element) => {
+  if (data.comments.length>5){
+    commentsNumber.innerText = '5';
+    loaderComments.addEventListener('click', loadComments);
+  } else{
+    loaderComments.classList.add('hidden');
+    commentsNumber.innerText = data.comments.length;
+
+  }
+
+  const comments = data.comments.slice(0,5);
+  comments.forEach((element) => {
     createComment(element);
   });
 
@@ -26,6 +38,8 @@ function closePopupData(){
     element.remove();
   });
   bigPicture.classList.add('hidden');
+  loaderComments.classList.remove('hidden');
+  loaderComments.removeEventListener('click',loadComments);
 }
 
 function createComment(data){
@@ -43,6 +57,11 @@ function createComment(data){
   li.appendChild(p);
   listComments.appendChild(li);
   socialComments.appendChild(listComments);
+}
+
+function loadComments (){
+  //получить количество комментариев не выведенных и отдать в функцию createComment
+
 }
 
 export {showPopupData, closePopupData};
