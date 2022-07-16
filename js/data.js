@@ -46,7 +46,7 @@ function createData(count){
       url: `photos/${index}.jpg`,
       description: 'какое-то описание',
       likes: getRandomInt(15, 200),
-      comments: createComments(getRandomInt(1,3)),
+      comments: createComments(getRandomInt(1,10)),
     };
     arrayData.push(element);
   }

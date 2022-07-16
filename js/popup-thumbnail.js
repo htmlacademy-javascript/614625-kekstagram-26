@@ -7,15 +7,11 @@ function showPopupData(data, evt){
   const likes = bigPicture.querySelector('.likes-count');
   const socialCaption = bigPicture.querySelector('.social__caption');
   const commentsCount = bigPicture.querySelector('.comments-count');
-  const socCommentsCount = bigPicture.querySelector('.social__comment-count');
-  const commentsLoader = bigPicture.querySelector('.comments-loader');
 
   data.comments.forEach((element) => {
     createComment(element);
   });
 
-  commentsLoader.classList.add('hidden');
-  socCommentsCount.classList.add('hidden');
   commentsCount.innerText = data.comments.length;
   socialCaption.innerText = data.description;
   likes.innerText = data.likes;

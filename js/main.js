@@ -37,4 +37,3 @@ buttonClose.addEventListener('click', () => {
   closePopupData();
   document.removeEventListener('keydown', onPopupEscKeydown);
 });
-
