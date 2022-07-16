@@ -2,6 +2,7 @@ import * as data from './data.js';
 import {createThumbnails} from './render-thumbnails.js';
 import {showPopupData, closePopupData} from './popup-thumbnail.js';
 import {isEscapeKey} from './util.js';
+import './upload-img.js';
 
 const COUNT_OBJECT = 25;
 
@@ -14,13 +15,14 @@ pictures.append(thumbnail);
 const buttonClose = document.querySelector('.big-picture__cancel');
 const body = document.querySelector('body');
 
-const onPopupEscKeydown = (evt) => {
+function onPopupEscKeydown(evt){
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     body.classList.remove('modal-open');
     closePopupData();
+    document.removeEventListener('keydown', onPopupEscKeydown);
   }
-};
+}
 
 pictures.onclick = function (evt) {
   if (evt.target.nodeName === 'IMG') {
@@ -33,6 +35,6 @@ pictures.onclick = function (evt) {
 buttonClose.addEventListener('click', () => {
   body.classList.remove('modal-open');
   closePopupData();
-
   document.removeEventListener('keydown', onPopupEscKeydown);
 });
+

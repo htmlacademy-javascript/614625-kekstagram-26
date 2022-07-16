@@ -710,6 +710,19 @@ main {
   border-radius: 5px;
 }
 
+.img-upload__form--errors{border:0;}
+
+.img-upload__form--errors p{
+  width: 450px;
+  margin: 0 auto;
+  padding: 15px 10px;
+  font-family: "Open Sans", "Arial", sans-serif;
+  font-weight: 400;
+  color: #e22d2d;
+  border-radius: 5px;
+  text-align: left;
+  background-color: #fff;
+}
 
 /**
  * Кнопка для отправки изображения
