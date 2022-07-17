@@ -13,11 +13,10 @@ function showPopupData(data, evt){
   if (data.comments.length>5){
     loaderComments.classList.remove('hidden');
     commentsNumber.innerText = '5';
-    loaderComments.addEventListener('click', () => loadComments(data));
+    loaderComments.addEventListener('click', ()=>loadComments(data));
   } else{
     loaderComments.classList.add('hidden');
     commentsNumber.innerText = data.comments.length;
-
   }
 
   const comments = data.comments.slice(0,5);
@@ -40,7 +39,7 @@ function closePopupData(){
   });
   bigPicture.classList.add('hidden');
   loaderComments.classList.add('hidden');
-  loaderComments.removeEventListener('click', () => loadComments());
+  loaderComments.removeEventListener('click', this);
 }
 
 function createComment(data){
@@ -63,20 +62,20 @@ function createComment(data){
 function loadComments (data){
   const countData = (commentsCount.innerText- commentsNumber.outerText);
   let commentsData;
-  if ( (countData%5) > 0 && ((countData/5)>1)){
+  if ((countData/5)>1){
     commentsData = data.comments.slice(commentsNumber.outerText,+commentsNumber.outerText + 5);
     commentsData.forEach( (element) => {
       createComment(element);
     });
     commentsNumber.innerText = +commentsNumber.innerText + 5;
   } else{
-    commentsNumber.innerText = +commentsNumber.innerText + countData;
     commentsData = data.comments.slice(commentsNumber.outerText,+commentsNumber.outerText + countData);
     commentsData.forEach( (element) => {
       createComment(element);
     });
+    commentsNumber.innerText = +commentsNumber.innerText + countData;
     loaderComments.classList.add('hidden');
-    loaderComments.removeEventListener('click', () => loadComments());
+    loaderComments.removeEventListener('click', this);
   }
 }
 
