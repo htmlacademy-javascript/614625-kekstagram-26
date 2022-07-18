@@ -1,21 +1,31 @@
 const bigPicture = document.querySelector('.big-picture');
 const socialComments = bigPicture.querySelector('.social__comments');
+const loaderComments = bigPicture.querySelector('.social__comments-loader');
+const commentsNumber = bigPicture.querySelector('.comments-number');
+const commentsCount = bigPicture.querySelector('.comments-count');
+let popUdData = null;
 
 function showPopupData(data, evt){
   evt.preventDefault();
+  popUdData = data;
   const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
   const likes = bigPicture.querySelector('.likes-count');
   const socialCaption = bigPicture.querySelector('.social__caption');
-  const commentsCount = bigPicture.querySelector('.comments-count');
-  const socCommentsCount = bigPicture.querySelector('.social__comment-count');
-  const commentsLoader = bigPicture.querySelector('.comments-loader');
 
-  data.comments.forEach((element) => {
+  if (data.comments.length>5){
+    loaderComments.classList.remove('hidden');
+    commentsNumber.innerText = '5';
+    loaderComments.addEventListener('click', loadComments);
+  } else{
+    loaderComments.classList.add('hidden');
+    commentsNumber.innerText = data.comments.length;
+  }
+
+  const comments = data.comments.slice(0,5);
+  comments.forEach((element) => {
     createComment(element);
   });
 
-  commentsLoader.classList.add('hidden');
-  socCommentsCount.classList.add('hidden');
   commentsCount.innerText = data.comments.length;
   socialCaption.innerText = data.description;
   likes.innerText = data.likes;
@@ -30,6 +40,8 @@ function closePopupData(){
     element.remove();
   });
   bigPicture.classList.add('hidden');
+  loaderComments.classList.add('hidden');
+  loaderComments.removeEventListener('click', loadComments);
 }
 
 function createComment(data){
@@ -47,6 +59,26 @@ function createComment(data){
   li.appendChild(p);
   listComments.appendChild(li);
   socialComments.appendChild(listComments);
+}
+
+function loadComments (){
+  const countData = (commentsCount.innerText- commentsNumber.outerText);
+  let commentsData;
+  if ((countData/5)>1){
+    commentsData = popUdData.comments.slice(commentsNumber.outerText,+commentsNumber.outerText + 5);
+    commentsData.forEach( (element) => {
+      createComment(element);
+    });
+    commentsNumber.innerText = +commentsNumber.innerText + 5;
+  } else{
+    commentsData = popUdData.comments.slice(commentsNumber.outerText,+commentsNumber.outerText + countData);
+    commentsData.forEach( (element) => {
+      createComment(element);
+    });
+    commentsNumber.innerText = +commentsNumber.innerText + countData;
+    loaderComments.classList.add('hidden');
+    loaderComments.removeEventListener('click', loadComments);
+  }
 }
 
 export {showPopupData, closePopupData};
