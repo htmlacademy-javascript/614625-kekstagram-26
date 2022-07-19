@@ -3,6 +3,7 @@ import {createThumbnails} from './render-thumbnails.js';
 import {showPopupData, closePopupData} from './popup-thumbnail.js';
 import {isEscapeKey} from './util.js';
 import './upload-img.js';
+import './edit-scaleimg.js';
 
 const COUNT_OBJECT = 25;
 
