@@ -14,12 +14,20 @@ function lowerScale(){
   if (controlValue.value === '0%'){
     return '';
   }
-  imgUpload.style.transform = 'scale(0.25)';
+  let value = controlValue.value.replace('%','');
+  value = +value - 25;
+  controlValue.value = `${value}%`;
+  value = value / 100;
+  imgUpload.style.transform = `scale(${value})`;
 }
 
 function addScale(){
   if (controlValue.value === '100%'){
     return '';
   }
-  imgUpload.style.transform = 'scale(0.75)';
+  let value = controlValue.value.replace('%','');
+  value = +value + 25;
+  controlValue.value = `${value}%`;
+  value = value / 100;
+  imgUpload.style.transform = `scale(${value})`;
 }
