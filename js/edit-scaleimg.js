@@ -6,10 +6,6 @@ const imgUpload = document.querySelector('.img-upload__preview img');
 controlSmall.addEventListener('click', lowerScale);
 controlBig.addEventListener('click', addScale);
 
-//проверить можно ли уменьшить или увеличить на 25
-//смысл функции какой добавить значение в инпут
-//применить эффект картинке
-//шаг 25%
 function lowerScale(){
   if (controlValue.value === '0%'){
     return '';
