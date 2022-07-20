@@ -6,6 +6,7 @@ const sepia = document.querySelector('.effects__preview--sepia');
 const marvin = document.querySelector('.effects__preview--marvin');
 const fobos = document.querySelector('.effects__preview--phobos');
 const znoy = document.querySelector('.effects__preview--heat');
+const effectLevel = document.querySelector('.effect-level__value');
 
 original.addEventListener('click', addOriginEffect);
 hrom.addEventListener('click',addHromEffect);
@@ -14,41 +15,133 @@ marvin.addEventListener('click',addMarvinEffect);
 fobos.addEventListener('click',addFobosEffect);
 znoy.addEventListener('click',addZnoyEffect);
 
-//При переключении эффектов, уровень насыщенности сбрасывается до начального значения (100%): слайдер, CSS-стиль изображения и значение поля должны обновляться.
-//при передвижении слайдера меняется эффект и меняется значение в инпуте
+noUiSlider.create(slider, {
+  range:{
+    min:0,
+    max:1,
+  },
+  start:0.1,
+  step:0.1,
+  connect: 'lower',
+});
+slider.setAttribute('disabled', true);
+slider.style.display = 'none';
+
+slider.noUiSlider.on('update', () => {
+  imgUpload.style.filter = '';
+  if(imgUpload.classList.contains('effects__preview--chrome')){
+    imgUpload.style.filter = `grayscale(${slider.noUiSlider.get()})`;
+  }
+  if(imgUpload.classList.contains('effects__preview--sepia')){
+    imgUpload.style.filter = `sepia(${slider.noUiSlider.get()})`;
+  }
+  if(imgUpload.classList.contains('effects__preview--marvin')){
+    imgUpload.style.filter = `invert(${slider.noUiSlider.get()}%)`;
+  }
+  if(imgUpload.classList.contains('effects__preview--phobos')){
+    imgUpload.style.filter = `blur(${slider.noUiSlider.get()}px)`;
+  }
+  if(imgUpload.classList.contains('effects__preview--heat')){
+    imgUpload.style.filter = `brightness(${slider.noUiSlider.get()})`;
+  }
+  effectLevel.value = slider.noUiSlider.get();
+});
 
 function addOriginEffect(){
-  //Для эффекта «Оригинал» CSS-стили filter удаляются.
-  //При выборе эффекта «Оригинал» слайдер скрывается.
+  original.setAttribute('checked', 'true');
+  effectLevel.value = '';
+  slider.setAttribute('disabled', true);
+  imgUpload.className = '';
+  imgUpload.style.filter = '';
+  slider.style.display = 'none';
 }
 
 function addHromEffect(){
-  console.log('click');
-  noUiSlider.create(slider, {
-    range:{
-      min:0,
-      max:1,
+  hrom.setAttribute('checked', 'true');
+  effectLevel.value = '1';
+  slider.removeAttribute('disabled');
+  slider.style.display = 'block';
+  imgUpload.className = '';
+  imgUpload.classList.add('effects__preview--chrome');
+  imgUpload.style.filter = 'grayscale(1)';
+  slider.noUiSlider.updateOptions({
+    range: {
+      min: 0.1,
+      max: 1,
     },
-    start:0.1,
-    step:0.1,
-    connect: 'lower',
+    step: 0.1
   });
-
-  //Для эффекта «Хром» — filter: grayscale(0..1) с шагом 0.1;
+  slider.noUiSlider.set(1);
 }
 
 function addSepiaEffect(){
-  //Для эффекта «Сепия» — filter: sepia(0..1) с шагом 0.1;
+  sepia.setAttribute('checked', 'true');
+  effectLevel.value = '1';
+  slider.removeAttribute('disabled');
+  slider.style.display = 'block';
+  imgUpload.className = '';
+  imgUpload.classList.add('effects__preview--sepia');
+  imgUpload.style.filter = 'sepia(1)';
+  slider.noUiSlider.updateOptions({
+    range: {
+      min: 0.1,
+      max: 1,
+    },
+    step: 0.1
+  });
+  slider.noUiSlider.set(1);
 }
 
 function addMarvinEffect(){
-  //Для эффекта «Марвин» — filter: invert(0..100%) с шагом 1%;
+  marvin.setAttribute('checked', 'true');
+  effectLevel.value = '100';
+  slider.removeAttribute('disabled');
+  slider.style.display = 'block';
+  imgUpload.className = '';
+  imgUpload.classList.add('effects__preview--marvin');
+  imgUpload.style.filter = 'invert(100%)';
+  slider.noUiSlider.updateOptions({
+    range: {
+      min: 0,
+      max: 100,
+    },
+    step: 1
+  });
+  slider.noUiSlider.set(100);
 }
 
 function addFobosEffect(){
-  //Для эффекта «Фобос» — filter: blur(0..3px) с шагом 0.1px;
+  fobos.setAttribute('checked', 'true');
+  effectLevel.value = '3';
+  slider.removeAttribute('disabled');
+  slider.style.display = 'block';
+  imgUpload.className = '';
+  imgUpload.classList.add('effects__preview--phobos');
+  imgUpload.style.filter = 'blur(3px)';
+  slider.noUiSlider.updateOptions({
+    range: {
+      min: 0,
+      max: 3,
+    },
+    step: 0.1
+  });
+  slider.noUiSlider.set(3);
 }
 
 function addZnoyEffect(){
-  //Для эффекта «Зной» — filter: brightness(1..3) с шагом 0.1;
+  znoy.setAttribute('checked', 'true');
+  effectLevel.value = '3';
+  slider.removeAttribute('disabled');
+  slider.style.display = 'block';
+  imgUpload.className = '';
+  imgUpload.classList.add('effects__preview--heat');
+  imgUpload.style.filter = 'brightness(3)';
+  slider.noUiSlider.updateOptions({
+    range: {
+      min: 1,
+      max: 3,
+    },
+    step: 0.1
+  });
+  slider.noUiSlider.set(3);
 }

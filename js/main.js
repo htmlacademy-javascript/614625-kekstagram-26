@@ -4,6 +4,7 @@ import {showPopupData, closePopupData} from './popup-thumbnail.js';
 import {isEscapeKey} from './util.js';
 import './upload-img.js';
 import './edit-scaleimg.js';
+import './effects-img.js';
 
 const COUNT_OBJECT = 25;
 
