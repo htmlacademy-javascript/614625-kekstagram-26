@@ -1,4 +1,5 @@
 const imgUpload = document.querySelector('.img-upload__preview img');
+const slider = document.querySelector('.effect-level__slider');
 const original = document.querySelector('.effects__preview--none');
 const hrom = document.querySelector('.effects__preview--chrome');
 const sepia = document.querySelector('.effects__preview--sepia');
@@ -22,6 +23,17 @@ function addOriginEffect(){
 }
 
 function addHromEffect(){
+  console.log('click');
+  noUiSlider.create(slider, {
+    range:{
+      min:0,
+      max:1,
+    },
+    start:0.1,
+    step:0.1,
+    connect: 'lower',
+  });
+
   //Для эффекта «Хром» — filter: grayscale(0..1) с шагом 0.1;
 }
 
