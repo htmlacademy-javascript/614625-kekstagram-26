@@ -8,7 +8,7 @@ import './effects-img.js';
 const COUNT_OBJECT = 25;
 const body = document.querySelector('body');
 
-fetch('https://26.javascript.pages.academy/kekstagram/dat')
+fetch('https://26.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok) {
       return response;
@@ -32,7 +32,12 @@ fetch('https://26.javascript.pages.academy/kekstagram/dat')
       }
     };
   })
-  .catch((error) => console.log(error));
+  .catch((error) =>{
+    const templateError = document.getElementById('error-data').content;
+    const element = templateError.cloneNode(true);
+    element.querySelector('p').innerText = error;
+    body.appendChild(element);
+  });
 
 const buttonClose = document.querySelector('.big-picture__cancel');
 
