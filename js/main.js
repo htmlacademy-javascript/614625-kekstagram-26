@@ -28,7 +28,6 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
 
 const buttonClose = document.querySelector('.big-picture__cancel');
 
-
 function onPopupEscKeydown(evt){
   if (isEscapeKey(evt)) {
     evt.preventDefault();
