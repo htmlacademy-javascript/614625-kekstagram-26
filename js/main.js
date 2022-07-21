@@ -13,7 +13,6 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     if (response.ok) {
       return response;
     }
-
     throw new Error(`${response.status} — ${response.statusText}`);
   })
   .then((response) => response.json())
