@@ -44,8 +44,39 @@ imgForm.addEventListener('submit', (evt) => {
   const errors = validateImgForm();
   errorField.querySelector('p').innerText = '';
   if (errors.length === 0) {
+    const formData = new FormData(evt.target);
+    fetch(
+      'https://26.javascript.pages.academy/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response;
+        }
+        throw new Error(`${response.status} — ${response.statusText}`);
+      })
+      .then(()=>{
+        body.classList.remove('modal-open');
+        imgUpload.classList.add('hidden');
+        buttonUpload.value = '';
+        document.removeEventListener('keydown', onCloseEscKeydown);
+        const success = document.getElementById('success').content;
+        const element = success.cloneNode(true);
+        body.appendChild(element);
+      })
+      .catch(() => {
+        const templateError = document.getElementById('error').content;
+        const element = templateError.cloneNode(true);
+        body.appendChild(element);
+        body.classList.remove('modal-open');
+        imgUpload.classList.add('hidden');
+        buttonUpload.value = '';
+        document.removeEventListener('keydown', onCloseEscKeydown);
+      });
     errorField.classList.add('hidden');
-    imgForm.submit();
   } else {
     errorField.classList.remove('hidden');
     errors.forEach((element) => {
