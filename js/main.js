@@ -22,6 +22,9 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     const thumbnail = createThumbnails(arrayData);
     const pictures = document.querySelector('.pictures');
     pictures.append(thumbnail);
+    const imgFilter = document.querySelector('.img-filters');
+    imgFilter.classList.remove('img-filters--inactive');
+    //добавить прослушиватель на кнопки и при нажатии на кнопки сначала чистить все фото, потом в засивимости от нажатой кнопки вызывать функцию
 
     pictures.onclick = function (evt) {
       if (evt.target.nodeName === 'IMG') {
