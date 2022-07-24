@@ -1,6 +1,6 @@
 import {createThumbnails} from './render-thumbnails.js';
 import {showPopupData, closePopupData} from './popup-thumbnail.js';
-import {isEscapeKey} from './util.js';
+import {isEscapeKey, getRandomInt} from './util.js';
 import './upload-img.js';
 import './edit-scaleimg.js';
 import './effects-img.js';
@@ -25,11 +25,36 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     const imgFilter = document.querySelector('.img-filters');
     imgFilter.classList.remove('img-filters--inactive');
     imgFilter.onclick = function (evt) {
+      const dataPictures = document.querySelectorAll('.picture');
+      dataPictures.forEach((element) => {
+        element.remove();
+      });
       if (evt.target.id === 'filter-random') {
-        console.log(evt.target.id);
-        arrayData;
+        //получить 10 чисел из диапазона от начала массива до конца
+        //получить элементы эти в новый массив
+        //выложить новый массив в поток
+        const numbers = [];
+        for (let i=0;i<=COUNT_OBJECT-1;i++){
+          numbers[i] = i;
+        }
+        const randomNumbers = [];
+        let number;
+        for (let i=0;i<=10-1;i++){
+          number = getRandomInt(0,numbers.length-1);
+          randomNumbers[i] = numbers[number];
+          numbers.splice(number, 1);
+        }
+        //создать новый элемент и в него запушить дату с рандомным индексом
+        const randomData = [];
+        for (let i=0;i<=randomNumbers.length-1;i++){
+          randomData[i] = arrayData[randomNumbers[i]];
+        }
+        const randomThumbnails = createThumbnails(randomData);
+        pictures.append(randomThumbnails);
       }
       if (evt.target.id === 'filter-discussed') {
+        //отсортировать массив по комментариям
+        //далее первые 10 выложить
         console.log(evt.target.id);
       }
       console.log(evt.target.id);
