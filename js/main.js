@@ -24,7 +24,17 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     pictures.append(thumbnail);
     const imgFilter = document.querySelector('.img-filters');
     imgFilter.classList.remove('img-filters--inactive');
-    //добавить прослушиватель на кнопки и при нажатии на кнопки сначала чистить все фото, потом в засивимости от нажатой кнопки вызывать функцию
+    imgFilter.onclick = function (evt) {
+      if (evt.target.id === 'filter-random') {
+        console.log(evt.target.id);
+        arrayData;
+      }
+      if (evt.target.id === 'filter-discussed') {
+        console.log(evt.target.id);
+      }
+      console.log(evt.target.id);
+    };
+
 
     pictures.onclick = function (evt) {
       if (evt.target.nodeName === 'IMG') {
