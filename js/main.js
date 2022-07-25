@@ -1,6 +1,6 @@
 import {createThumbnails} from './render-thumbnails.js';
 import {showPopupData, closePopupData} from './popup-thumbnail.js';
-import {isEscapeKey} from './util.js';
+import {isEscapeKey, getRandomInt, debounce} from './util.js';
 import './upload-img.js';
 import './edit-scaleimg.js';
 import './effects-img.js';
@@ -22,6 +22,46 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     const thumbnail = createThumbnails(arrayData);
     const pictures = document.querySelector('.pictures');
     pictures.append(thumbnail);
+    const imgFilter = document.querySelector('.img-filters');
+    imgFilter.classList.remove('img-filters--inactive');
+    const imgFilterForm = document.querySelector('.img-filters__form');
+
+    function changeFilter(evt) {
+      const dataPictures = document.querySelectorAll('.picture');
+      imgFilter.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
+      evt.target.classList.add('img-filters__button--active');
+      dataPictures.forEach((element) => {
+        element.remove();
+      });
+      if (evt.target.id === 'filter-random') {
+        const numbers = [];
+        for (let i=0;i<=COUNT_OBJECT-1;i++){
+          numbers[i] = i;
+        }
+        const randomNumbers = [];
+        let number;
+        for (let i=0;i<=10-1;i++){
+          number = getRandomInt(0,numbers.length-1);
+          randomNumbers[i] = numbers[number];
+          numbers.splice(number, 1);
+        }
+        const randomData = [];
+        for (let i=0;i<=randomNumbers.length-1;i++){
+          randomData[i] = arrayData[randomNumbers[i]];
+        }
+        const randomThumbnails = createThumbnails(randomData);
+        debounce(pictures.append(randomThumbnails));
+      }
+      if (evt.target.id === 'filter-discussed') {
+        const discussionArr = (arrayData.sort((a,b) => b.comments.length - a.comments.length)).slice(0,10);
+        debounce(pictures.append(createThumbnails(discussionArr)));
+      }
+      if (evt.target.id === 'filter-default'){
+        debounce(pictures.append(createThumbnails(arrayData)));
+      }
+    }
+    const changeFilterdebounce = debounce(changeFilter);
+    imgFilterForm.addEventListener('click', changeFilterdebounce);
 
     pictures.onclick = function (evt) {
       if (evt.target.nodeName === 'IMG') {
