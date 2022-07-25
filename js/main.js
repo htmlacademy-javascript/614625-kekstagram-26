@@ -66,6 +66,7 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     pictures.onclick = function (evt) {
       if (evt.target.nodeName === 'IMG') {
         body.classList.add('modal-open');
+        //здесь косяк
         showPopupData(arrayData[evt.target.offsetParent.dataset.id],evt);
         document.addEventListener('keydown', onPopupEscKeydown);
       }
