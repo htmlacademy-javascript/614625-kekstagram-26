@@ -24,15 +24,15 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     pictures.append(thumbnail);
     const imgFilter = document.querySelector('.img-filters');
     imgFilter.classList.remove('img-filters--inactive');
-    imgFilter.onclick = function (evt) {
+    const imgFilterForm = document.querySelector('.img-filters__form');
+    imgFilterForm.onclick = function (evt) {
       const dataPictures = document.querySelectorAll('.picture');
+      imgFilter.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
+      evt.target.classList.add('img-filters__button--active');
       dataPictures.forEach((element) => {
         element.remove();
       });
       if (evt.target.id === 'filter-random') {
-        //получить 10 чисел из диапазона от начала массива до конца
-        //получить элементы эти в новый массив
-        //выложить новый массив в поток
         const numbers = [];
         for (let i=0;i<=COUNT_OBJECT-1;i++){
           numbers[i] = i;
@@ -44,7 +44,6 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
           randomNumbers[i] = numbers[number];
           numbers.splice(number, 1);
         }
-        //создать новый элемент и в него запушить дату с рандомным индексом
         const randomData = [];
         for (let i=0;i<=randomNumbers.length-1;i++){
           randomData[i] = arrayData[randomNumbers[i]];
@@ -53,13 +52,13 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
         pictures.append(randomThumbnails);
       }
       if (evt.target.id === 'filter-discussed') {
-        //отсортировать массив по комментариям
-        //далее первые 10 выложить
-        console.log(evt.target.id);
+        const discussionArr = (arrayData.sort((a,b) => b.comments.length - a.comments.length)).slice(0,10);
+        pictures.append(createThumbnails(discussionArr));
       }
-      console.log(evt.target.id);
+      if (evt.target.id === 'filter-default'){
+        pictures.append(createThumbnails(arrayData));
+      }
     };
-
 
     pictures.onclick = function (evt) {
       if (evt.target.nodeName === 'IMG') {
