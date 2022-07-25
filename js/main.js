@@ -1,6 +1,6 @@
 import {createThumbnails} from './render-thumbnails.js';
 import {showPopupData, closePopupData} from './popup-thumbnail.js';
-import {isEscapeKey, getRandomInt} from './util.js';
+import {isEscapeKey, getRandomInt, debounce} from './util.js';
 import './upload-img.js';
 import './edit-scaleimg.js';
 import './effects-img.js';
@@ -49,14 +49,14 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
           randomData[i] = arrayData[randomNumbers[i]];
         }
         const randomThumbnails = createThumbnails(randomData);
-        pictures.append(randomThumbnails);
+        debounce(pictures.append(randomThumbnails));
       }
       if (evt.target.id === 'filter-discussed') {
         const discussionArr = (arrayData.sort((a,b) => b.comments.length - a.comments.length)).slice(0,10);
-        pictures.append(createThumbnails(discussionArr));
+        debounce(pictures.append(createThumbnails(discussionArr)));
       }
       if (evt.target.id === 'filter-default'){
-        pictures.append(createThumbnails(arrayData));
+        debounce(pictures.append(createThumbnails(arrayData)));
       }
     };
 
