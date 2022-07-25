@@ -25,7 +25,8 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     const imgFilter = document.querySelector('.img-filters');
     imgFilter.classList.remove('img-filters--inactive');
     const imgFilterForm = document.querySelector('.img-filters__form');
-    imgFilterForm.onclick = function (evt) {
+
+    function changeFilter(evt) {
       const dataPictures = document.querySelectorAll('.picture');
       imgFilter.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
       evt.target.classList.add('img-filters__button--active');
@@ -58,7 +59,9 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
       if (evt.target.id === 'filter-default'){
         debounce(pictures.append(createThumbnails(arrayData)));
       }
-    };
+    }
+    const changeFilterdebounce = debounce(changeFilter);
+    imgFilterForm.addEventListener('click', changeFilterdebounce);
 
     pictures.onclick = function (evt) {
       if (evt.target.nodeName === 'IMG') {
