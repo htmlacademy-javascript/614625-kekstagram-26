@@ -66,6 +66,11 @@ imgForm.addEventListener('submit', (evt) => {
         const success = document.getElementById('success').content;
         const element = success.cloneNode(true);
         body.appendChild(element);
+        const blockSuccess = document.querySelector('.success');
+        const successButton = blockSuccess.querySelector('.success__button');
+        successButton.onclick = function () {
+          blockSuccess.classList.add('hidden');
+        };
       })
       .catch(() => {
         const templateError = document.getElementById('error').content;
