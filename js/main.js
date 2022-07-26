@@ -50,14 +50,14 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
           randomData[i] = arrayData[randomNumbers[i]];
         }
         const randomThumbnails = createThumbnails(randomData);
-        debounce(pictures.append(randomThumbnails));
+        pictures.append(randomThumbnails);
       }
       if (evt.target.id === 'filter-discussed') {
         const discussionArr = (arrayData.sort((a,b) => b.comments.length - a.comments.length)).slice(0,10);
-        debounce(pictures.append(createThumbnails(discussionArr)));
+        pictures.append(createThumbnails(discussionArr));
       }
       if (evt.target.id === 'filter-default'){
-        debounce(pictures.append(createThumbnails(arrayData)));
+        pictures.append(createThumbnails(arrayData));
       }
     }
     const changeFilterdebounce = debounce(changeFilter);
