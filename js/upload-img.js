@@ -29,6 +29,7 @@ imgUploadCancel.addEventListener('click', () => {
   imgUpload.classList.add('hidden');
   buttonUpload.value = '';
   document.removeEventListener('keydown', onCloseEscKeydown);
+  imgUpload.style.filter = '';
 });
 
 buttonUpload.addEventListener('change', () => {
