@@ -9,11 +9,11 @@ const znoy = document.querySelector('.effects__preview--heat');
 const effectLevel = document.querySelector('.effect-level__value');
 
 original.addEventListener('click', addOriginEffect);
-hrom.addEventListener('click',addHromEffect);
+hrom.addEventListener('click',addChromeEffect);
 sepia.addEventListener('click',addSepiaEffect);
 marvin.addEventListener('click',addMarvinEffect);
-fobos.addEventListener('click',addFobosEffect);
-znoy.addEventListener('click',addZnoyEffect);
+fobos.addEventListener('click',addPhobosEffect);
+znoy.addEventListener('click',addHeatEffect);
 
 noUiSlider.create(slider, {
   range:{
@@ -56,7 +56,7 @@ function addOriginEffect(){
   slider.style.display = 'none';
 }
 
-function addHromEffect(){
+function addChromeEffect(){
   hrom.setAttribute('checked', 'true');
   effectLevel.value = '1';
   slider.removeAttribute('disabled');
@@ -110,7 +110,7 @@ function addMarvinEffect(){
   slider.noUiSlider.set(100);
 }
 
-function addFobosEffect(){
+function addPhobosEffect(){
   fobos.setAttribute('checked', 'true');
   effectLevel.value = '3';
   slider.removeAttribute('disabled');
@@ -128,7 +128,7 @@ function addFobosEffect(){
   slider.noUiSlider.set(3);
 }
 
-function addZnoyEffect(){
+function addHeatEffect(){
   znoy.setAttribute('checked', 'true');
   effectLevel.value = '3';
   slider.removeAttribute('disabled');
