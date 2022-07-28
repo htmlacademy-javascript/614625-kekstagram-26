@@ -1,8 +1,3 @@
-function checkLength(string, maxLength){
-  return string.length <= maxLength;
-}
-checkLength('asd',4);
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);

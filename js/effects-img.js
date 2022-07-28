@@ -24,7 +24,7 @@ noUiSlider.create(slider, {
   step:0.1,
   connect: 'lower',
 });
-slider.setAttribute('disabled', true);
+slider.setAttribute('disabled', 'true');
 slider.style.display = 'none';
 
 slider.noUiSlider.on('update', () => {
@@ -50,7 +50,7 @@ slider.noUiSlider.on('update', () => {
 function addOriginEffect(){
   original.setAttribute('checked', 'true');
   effectLevel.value = '';
-  slider.setAttribute('disabled', true);
+  slider.setAttribute('disabled', 'true');
   imgUpload.className = '';
   imgUpload.style.filter = '';
   slider.style.display = 'none';
