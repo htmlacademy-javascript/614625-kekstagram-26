@@ -64,7 +64,7 @@ imgForm.addEventListener('submit', (evt) => {
         imgUpload.classList.add('hidden');
         buttonUpload.value = '';
         document.removeEventListener('keydown', onCloseEscKeydown);
-        const success = document.getElementById('success').content;
+        const success = document.querySelector('#success').content;
         const element = success.cloneNode(true);
         body.appendChild(element);
         const blockSuccess = document.querySelector('.success');
@@ -75,7 +75,7 @@ imgForm.addEventListener('submit', (evt) => {
         document.addEventListener('keydown', onPopupEscKeydown);
       })
       .catch(() => {
-        const templateError = document.getElementById('error').content;
+        const templateError = document.querySelector('#error').content;
         const element = templateError.cloneNode(true);
         body.appendChild(element);
         body.classList.remove('modal-open');

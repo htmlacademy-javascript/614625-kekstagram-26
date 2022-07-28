@@ -78,7 +78,7 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
     };
   })
   .catch((error) =>{
-    const templateError = document.getElementById('error-data').content;
+    const templateError = document.querySelector('#error-data').content;
     const element = templateError.cloneNode(true);
     element.querySelector('p').innerText = error;
     body.appendChild(element);
