@@ -9,7 +9,7 @@ const TXT_MESSAGE = `Всё отлично!
 Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент?!`;
 const ARR_TXT = TXT_MESSAGE.split('\n');
 
-const NAME = [
+const NAMES = [
   'Федя',
   'Мария',
   'Константин',
@@ -30,7 +30,7 @@ function createComments(count){
       id: index,
       avatar: `img/avatar-${getRandomInt(1,6)}.svg`,
       message: ARR_TXT[getRandomInt(0,6)],
-      name: NAME[getRandomInt(0,9)],
+      name: NAMES[getRandomInt(0,9)],
     };
     comments.push(element);
   }
