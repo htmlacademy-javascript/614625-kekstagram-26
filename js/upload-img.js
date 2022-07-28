@@ -72,6 +72,7 @@ imgForm.addEventListener('submit', (evt) => {
         successButton.onclick = function () {
           blockSuccess.classList.add('hidden');
         };
+        document.addEventListener('keydown', onPopupEscKeydown);
       })
       .catch(() => {
         const templateError = document.getElementById('error').content;
@@ -90,6 +91,16 @@ imgForm.addEventListener('submit', (evt) => {
     });
   }
 });
+
+function onPopupEscKeydown(evt){
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    body.classList.remove('modal-open');
+    const blockSuccess = document.querySelector('.success');
+    blockSuccess.classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscKeydown);
+  }
+}
 
 function validateImgForm(){
   const isValid = pristine.validate();
