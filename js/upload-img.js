@@ -59,7 +59,7 @@ imgForm.addEventListener('submit', (evt) => {
   if (errors.length === 0) {
     const formData = new FormData(evt.target);
     fetch(
-      'https://26.javascript.pages.academy/kekstagra',
+      'https://26.javascript.pages.academy/kekstagram',
       {
         method: 'POST',
         body: formData,
@@ -76,9 +76,13 @@ imgForm.addEventListener('submit', (evt) => {
         imgUpload.classList.add('hidden');
         buttonUpload.value = '';
         document.removeEventListener('keydown', onCloseEscKeydown);
-        const success = document.querySelector('#success').content;
-        const element = success.cloneNode(true);
-        body.appendChild(element);
+        if( document.querySelector('.success') === null ){
+          const success = document.querySelector('#success').content;
+          const element = success.cloneNode(true);
+          body.appendChild(element);
+        } else {
+          document.querySelector('.success').classList.remove('hidden');
+        }
         const blockSuccess = document.querySelector('.success');
         const successButton = blockSuccess.querySelector('.success__button');
         successButton.onclick = function () {
@@ -87,9 +91,13 @@ imgForm.addEventListener('submit', (evt) => {
         document.addEventListener('keydown', onPopupEscKeydown);
       })
       .catch(() => {
-        const templateError = document.querySelector('#error').content;
-        const element = templateError.cloneNode(true);
-        body.appendChild(element);
+        if( document.querySelector('.error') === null ){
+          const templateError = document.querySelector('#error').content;
+          const element = templateError.cloneNode(true);
+          body.appendChild(element);
+        } else {
+          document.querySelector('.error').classList.remove('hidden');
+        }
         body.classList.remove('modal-open');
         imgUpload.classList.add('hidden');
         buttonUpload.value = '';
@@ -99,7 +107,6 @@ imgForm.addEventListener('submit', (evt) => {
         errorButton.onclick = function () {
           document.querySelector('.error').classList.add('hidden');
         };
-
       });
     errorField.classList.add('hidden');
   } else {
