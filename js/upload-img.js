@@ -59,7 +59,7 @@ imgForm.addEventListener('submit', (evt) => {
   if (errors.length === 0) {
     const formData = new FormData(evt.target);
     fetch(
-      'https://26.javascript.pages.academy/kekstagram',
+      'https://26.javascript.pages.academy/kekstagra',
       {
         method: 'POST',
         body: formData,
@@ -94,6 +94,12 @@ imgForm.addEventListener('submit', (evt) => {
         imgUpload.classList.add('hidden');
         buttonUpload.value = '';
         document.removeEventListener('keydown', onCloseEscKeydown);
+        document.addEventListener('keydown',onCloseEscError);
+        const errorButton = document.querySelector('.error__button');
+        errorButton.onclick = function () {
+          document.querySelector('.error').classList.add('hidden');
+        };
+
       });
     errorField.classList.add('hidden');
   } else {
@@ -111,6 +117,14 @@ function onPopupEscKeydown(evt){
     const blockSuccess = document.querySelector('.success');
     blockSuccess.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscKeydown);
+  }
+}
+
+function onCloseEscError(evt){
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    document.querySelector('.error').classList.add('hidden');
+    document.removeEventListener('keydown', onCloseEscError);
   }
 }
 
