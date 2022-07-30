@@ -9,6 +9,9 @@ const errorField = document.querySelector('.img-upload__form--errors');
 const pristine = new Pristine(imgForm);
 const imgUpload = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
+const imgPreview = document.querySelector('.img-upload__preview img');
+const slider = document.querySelector('.effect-level__slider');
+const effectNone = document.querySelector('#effect-none');
 
 function onCloseEscKeydown (evt){
   if (isEscapeKey(evt)) {
@@ -21,6 +24,11 @@ function onCloseEscKeydown (evt){
     imgUpload.classList.add('hidden');
     buttonUpload.value = '';
     document.removeEventListener('keydown',onCloseEscKeydown);
+    imgPreview.style.filter = '';
+    imgPreview.className = '';
+    effectNone.setAttribute('checked', 'true');
+    slider.setAttribute('disabled', 'true');
+    slider.style.display = 'none';
   }
 }
 
@@ -29,6 +37,11 @@ imgUploadCancel.addEventListener('click', () => {
   imgUpload.classList.add('hidden');
   buttonUpload.value = '';
   document.removeEventListener('keydown', onCloseEscKeydown);
+  imgPreview.style.filter = '';
+  imgPreview.className = '';
+  effectNone.setAttribute('checked', 'true');
+  slider.setAttribute('disabled', 'true');
+  slider.style.display = 'none';
 });
 
 buttonUpload.addEventListener('change', () => {
@@ -63,23 +76,37 @@ imgForm.addEventListener('submit', (evt) => {
         imgUpload.classList.add('hidden');
         buttonUpload.value = '';
         document.removeEventListener('keydown', onCloseEscKeydown);
-        const success = document.getElementById('success').content;
-        const element = success.cloneNode(true);
-        body.appendChild(element);
+        if( document.querySelector('.success') === null ){
+          const success = document.querySelector('#success').content;
+          const element = success.cloneNode(true);
+          body.appendChild(element);
+        } else {
+          document.querySelector('.success').classList.remove('hidden');
+        }
         const blockSuccess = document.querySelector('.success');
         const successButton = blockSuccess.querySelector('.success__button');
         successButton.onclick = function () {
           blockSuccess.classList.add('hidden');
         };
+        document.addEventListener('keydown', onPopupEscKeydown);
       })
       .catch(() => {
-        const templateError = document.getElementById('error').content;
-        const element = templateError.cloneNode(true);
-        body.appendChild(element);
+        if( document.querySelector('.error') === null ){
+          const templateError = document.querySelector('#error').content;
+          const element = templateError.cloneNode(true);
+          body.appendChild(element);
+        } else {
+          document.querySelector('.error').classList.remove('hidden');
+        }
         body.classList.remove('modal-open');
         imgUpload.classList.add('hidden');
         buttonUpload.value = '';
         document.removeEventListener('keydown', onCloseEscKeydown);
+        document.addEventListener('keydown',onCloseEscError);
+        const errorButton = document.querySelector('.error__button');
+        errorButton.onclick = function () {
+          document.querySelector('.error').classList.add('hidden');
+        };
       });
     errorField.classList.add('hidden');
   } else {
@@ -89,6 +116,24 @@ imgForm.addEventListener('submit', (evt) => {
     });
   }
 });
+
+function onPopupEscKeydown(evt){
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    body.classList.remove('modal-open');
+    const blockSuccess = document.querySelector('.success');
+    blockSuccess.classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscKeydown);
+  }
+}
+
+function onCloseEscError(evt){
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    document.querySelector('.error').classList.add('hidden');
+    document.removeEventListener('keydown', onCloseEscError);
+  }
+}
 
 function validateImgForm(){
   const isValid = pristine.validate();

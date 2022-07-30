@@ -9,22 +9,57 @@ const znoy = document.querySelector('.effects__preview--heat');
 const effectLevel = document.querySelector('.effect-level__value');
 
 original.addEventListener('click', addOriginEffect);
-hrom.addEventListener('click',addHromEffect);
+hrom.addEventListener('click',addChromeEffect);
 sepia.addEventListener('click',addSepiaEffect);
 marvin.addEventListener('click',addMarvinEffect);
-fobos.addEventListener('click',addFobosEffect);
-znoy.addEventListener('click',addZnoyEffect);
+fobos.addEventListener('click',addPhobosEffect);
+znoy.addEventListener('click',addHeatEffect);
+
+const sliderInitial = {
+  min:0,
+  max:1,
+  step:0.1,
+  start:0.1,
+};
+
+const valueEffects = {
+  chrome: {
+    min: 0.1,
+    max: 1,
+    step: 0.1,
+  },
+  sepia: {
+    min: 0.1,
+    max: 1,
+    step: 0.1,
+  },
+  marvin: {
+    min: 0,
+    max: 100,
+    step: 1,
+  },
+  phobos: {
+    min: 0,
+    max: 3,
+    step: 0.1,
+  },
+  heat: {
+    min: 1,
+    max: 3,
+    step: 0.1,
+  },
+};
 
 noUiSlider.create(slider, {
   range:{
-    min:0,
-    max:1,
+    min:sliderInitial['min'],
+    max:sliderInitial['max'],
   },
-  start:0.1,
-  step:0.1,
+  start:sliderInitial['start'],
+  step:sliderInitial['step'],
   connect: 'lower',
 });
-slider.setAttribute('disabled', true);
+slider.setAttribute('disabled', 'true');
 slider.style.display = 'none';
 
 slider.noUiSlider.on('update', () => {
@@ -50,98 +85,98 @@ slider.noUiSlider.on('update', () => {
 function addOriginEffect(){
   original.setAttribute('checked', 'true');
   effectLevel.value = '';
-  slider.setAttribute('disabled', true);
+  slider.setAttribute('disabled', 'true');
   imgUpload.className = '';
   imgUpload.style.filter = '';
   slider.style.display = 'none';
 }
 
-function addHromEffect(){
+function addChromeEffect(){
   hrom.setAttribute('checked', 'true');
-  effectLevel.value = '1';
+  effectLevel.value = `grayscale(${valueEffects['chrome']['max']})`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--chrome');
-  imgUpload.style.filter = 'grayscale(1)';
+  imgUpload.style.filter = `grayscale(${valueEffects['chrome']['max']})`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: 0.1,
-      max: 1,
+      min: valueEffects['chrome']['min'],
+      max: valueEffects['chrome']['max'],
     },
-    step: 0.1
+    step: valueEffects['chrome']['step']
   });
-  slider.noUiSlider.set(1);
+  slider.noUiSlider.set(valueEffects['chrome']['max']);
 }
 
 function addSepiaEffect(){
   sepia.setAttribute('checked', 'true');
-  effectLevel.value = '1';
+  effectLevel.value = `${valueEffects['sepia']['max']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--sepia');
-  imgUpload.style.filter = 'sepia(1)';
+  imgUpload.style.filter = `sepia(${valueEffects['sepia']['max']})`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: 0.1,
-      max: 1,
+      min: valueEffects['sepia']['min'],
+      max: valueEffects['sepia']['max'],
     },
-    step: 0.1
+    step: valueEffects['sepia']['step']
   });
-  slider.noUiSlider.set(1);
+  slider.noUiSlider.set(valueEffects['sepia']['max']);
 }
 
 function addMarvinEffect(){
   marvin.setAttribute('checked', 'true');
-  effectLevel.value = '100';
+  effectLevel.value = `${valueEffects['marvin']['min']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--marvin');
-  imgUpload.style.filter = 'invert(100%)';
+  imgUpload.style.filter = `invert(${valueEffects['marvin']['max']}%)`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: 0,
-      max: 100,
+      min: valueEffects['marvin']['min'],
+      max: valueEffects['marvin']['max'],
     },
-    step: 1
+    step: valueEffects['marvin']['min']
   });
-  slider.noUiSlider.set(100);
+  slider.noUiSlider.set(valueEffects['marvin']['max']);
 }
 
-function addFobosEffect(){
+function addPhobosEffect(){
   fobos.setAttribute('checked', 'true');
-  effectLevel.value = '3';
+  effectLevel.value = `${valueEffects['phobos']['max']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--phobos');
-  imgUpload.style.filter = 'blur(3px)';
+  imgUpload.style.filter = `blur(${valueEffects['phobos']['max']}px)`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: 0,
-      max: 3,
+      min: valueEffects['phobos']['min'],
+      max: valueEffects['phobos']['max'],
     },
-    step: 0.1
+    step: valueEffects['phobos']['step']
   });
-  slider.noUiSlider.set(3);
+  slider.noUiSlider.set(valueEffects['phobos']['max']);
 }
 
-function addZnoyEffect(){
+function addHeatEffect(){
   znoy.setAttribute('checked', 'true');
-  effectLevel.value = '3';
+  effectLevel.value = `${valueEffects['heat']['max']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--heat');
-  imgUpload.style.filter = 'brightness(3)';
+  imgUpload.style.filter = `brightness(${valueEffects['heat']['max']})`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: 1,
-      max: 3,
+      min: valueEffects['heat']['min'],
+      max: valueEffects['heat']['max'],
     },
-    step: 0.1
+    step: valueEffects['heat']['step']
   });
-  slider.noUiSlider.set(3);
+  slider.noUiSlider.set(valueEffects['heat']['max']);
 }
