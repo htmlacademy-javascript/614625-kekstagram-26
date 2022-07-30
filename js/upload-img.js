@@ -9,6 +9,9 @@ const errorField = document.querySelector('.img-upload__form--errors');
 const pristine = new Pristine(imgForm);
 const imgUpload = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
+const imgPreview = document.querySelector('.img-upload__preview img');
+const slider = document.querySelector('.effect-level__slider');
+const effectNone = document.querySelector('#effect-none');
 
 function onCloseEscKeydown (evt){
   if (isEscapeKey(evt)) {
@@ -21,6 +24,11 @@ function onCloseEscKeydown (evt){
     imgUpload.classList.add('hidden');
     buttonUpload.value = '';
     document.removeEventListener('keydown',onCloseEscKeydown);
+    imgPreview.style.filter = '';
+    imgPreview.className = '';
+    effectNone.setAttribute('checked', 'true');
+    slider.setAttribute('disabled', 'true');
+    slider.style.display = 'none';
   }
 }
 
@@ -29,7 +37,11 @@ imgUploadCancel.addEventListener('click', () => {
   imgUpload.classList.add('hidden');
   buttonUpload.value = '';
   document.removeEventListener('keydown', onCloseEscKeydown);
-  imgUpload.style.filter = '';
+  imgPreview.style.filter = '';
+  imgPreview.className = '';
+  effectNone.setAttribute('checked', 'true');
+  slider.setAttribute('disabled', 'true');
+  slider.style.display = 'none';
 });
 
 buttonUpload.addEventListener('change', () => {
