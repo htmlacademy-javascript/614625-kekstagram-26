@@ -84,6 +84,11 @@ imgForm.addEventListener('submit', (evt) => {
           document.querySelector('.success').classList.remove('hidden');
         }
         const blockSuccess = document.querySelector('.success');
+        blockSuccess.onclick = function(event){
+          if (event.target.classList.value === 'success'){
+            blockSuccess.classList.add('hidden');
+          }
+        };
         const successButton = blockSuccess.querySelector('.success__button');
         successButton.onclick = function () {
           blockSuccess.classList.add('hidden');
@@ -103,9 +108,15 @@ imgForm.addEventListener('submit', (evt) => {
         buttonUpload.value = '';
         document.removeEventListener('keydown', onCloseEscKeydown);
         document.addEventListener('keydown',onCloseEscError);
+        const errorBlock = document.querySelector('.error');
         const errorButton = document.querySelector('.error__button');
+        errorBlock.onclick = function(event){
+          if (event.target.classList.value === 'error'){
+            errorBlock.classList.add('hidden');
+          }
+        };
         errorButton.onclick = function () {
-          document.querySelector('.error').classList.add('hidden');
+          errorBlock.classList.add('hidden');
         };
       });
     errorField.classList.add('hidden');
