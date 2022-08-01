@@ -42,6 +42,8 @@ function closeUpload(){
   slider.setAttribute('disabled', 'true');
   slider.style.display = 'none';
   document.removeEventListener('keydown', onCloseEscKeydown);
+  imgPreview.style.transform = '';
+  document.querySelector('.scale__control--value').value = '100%';
 }
 
 buttonUpload.addEventListener('change', () => {
