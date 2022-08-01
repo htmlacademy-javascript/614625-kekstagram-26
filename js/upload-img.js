@@ -79,9 +79,7 @@ imgForm.addEventListener('submit', (evt) => {
         throw new Error(`${response.status} — ${response.statusText}`);
       })
       .then(()=>{
-        body.classList.remove('modal-open');
-        imgUpload.classList.add('hidden');
-        buttonUpload.value = '';
+        closeUpload();
         document.removeEventListener('keydown', onCloseEscKeydown);
         if( document.querySelector('.success') === null ){
           const success = document.querySelector('#success').content;
@@ -110,9 +108,7 @@ imgForm.addEventListener('submit', (evt) => {
         } else {
           document.querySelector('.error').classList.remove('hidden');
         }
-        body.classList.remove('modal-open');
-        imgUpload.classList.add('hidden');
-        buttonUpload.value = '';
+        closeUpload();
         document.removeEventListener('keydown', onCloseEscKeydown);
         document.addEventListener('keydown',onCloseEscError);
         const errorBlock = document.querySelector('.error');
