@@ -5,6 +5,7 @@ const body = document.querySelector('body');
 const imgForm = document.querySelector('.img-upload__form');
 const buttonUpload = document.querySelector('.img-upload__input');
 const textHashtags = document.querySelector('.text__hashtags');
+const textDescription = document.querySelector('.text__description');
 const errorField = document.querySelector('.img-upload__form--errors');
 const pristine = new Pristine(imgForm);
 const imgUpload = document.querySelector('.img-upload__overlay');
@@ -44,6 +45,10 @@ function closeUpload(){
   document.removeEventListener('keydown', onCloseEscKeydown);
   imgPreview.style.transform = '';
   document.querySelector('.scale__control--value').value = '100%';
+  textHashtags.value = '';
+  textDescription.value = '';
+  errorField.querySelector('p').innerText = '';
+  errorField.classList.add('hidden');
 }
 
 buttonUpload.addEventListener('change', () => {
