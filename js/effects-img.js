@@ -15,14 +15,14 @@ marvin.addEventListener('click',addMarvinEffect);
 fobos.addEventListener('click',addPhobosEffect);
 znoy.addEventListener('click',addHeatEffect);
 
-const sliderInitial = {
+const SLIDER_INITIAL = {
   min:0,
   max:1,
   step:0.1,
   start:0.1,
 };
 
-const valueEffects = {
+const VALUE_EFFECTS = {
   chrome: {
     min: 0.1,
     max: 1,
@@ -52,11 +52,11 @@ const valueEffects = {
 
 noUiSlider.create(slider, {
   range:{
-    min:sliderInitial['min'],
-    max:sliderInitial['max'],
+    min:SLIDER_INITIAL['min'],
+    max:SLIDER_INITIAL['max'],
   },
-  start:sliderInitial['start'],
-  step:sliderInitial['step'],
+  start:SLIDER_INITIAL['start'],
+  step:SLIDER_INITIAL['step'],
   connect: 'lower',
 });
 slider.setAttribute('disabled', 'true');
@@ -93,90 +93,90 @@ function addOriginEffect(){
 
 function addChromeEffect(){
   hrom.setAttribute('checked', 'true');
-  effectLevel.value = `grayscale(${valueEffects['chrome']['max']})`;
+  effectLevel.value = `grayscale(${VALUE_EFFECTS['chrome']['max']})`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--chrome');
-  imgUpload.style.filter = `grayscale(${valueEffects['chrome']['max']})`;
+  imgUpload.style.filter = `grayscale(${VALUE_EFFECTS['chrome']['max']})`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: valueEffects['chrome']['min'],
-      max: valueEffects['chrome']['max'],
+      min: VALUE_EFFECTS['chrome']['min'],
+      max: VALUE_EFFECTS['chrome']['max'],
     },
-    step: valueEffects['chrome']['step']
+    step: VALUE_EFFECTS['chrome']['step']
   });
-  slider.noUiSlider.set(valueEffects['chrome']['max']);
+  slider.noUiSlider.set(VALUE_EFFECTS['chrome']['max']);
 }
 
 function addSepiaEffect(){
   sepia.setAttribute('checked', 'true');
-  effectLevel.value = `${valueEffects['sepia']['max']}`;
+  effectLevel.value = `${VALUE_EFFECTS['sepia']['max']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--sepia');
-  imgUpload.style.filter = `sepia(${valueEffects['sepia']['max']})`;
+  imgUpload.style.filter = `sepia(${VALUE_EFFECTS['sepia']['max']})`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: valueEffects['sepia']['min'],
-      max: valueEffects['sepia']['max'],
+      min: VALUE_EFFECTS['sepia']['min'],
+      max: VALUE_EFFECTS['sepia']['max'],
     },
-    step: valueEffects['sepia']['step']
+    step: VALUE_EFFECTS['sepia']['step']
   });
-  slider.noUiSlider.set(valueEffects['sepia']['max']);
+  slider.noUiSlider.set(VALUE_EFFECTS['sepia']['max']);
 }
 
 function addMarvinEffect(){
   marvin.setAttribute('checked', 'true');
-  effectLevel.value = `${valueEffects['marvin']['min']}`;
+  effectLevel.value = `${VALUE_EFFECTS['marvin']['min']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--marvin');
-  imgUpload.style.filter = `invert(${valueEffects['marvin']['max']}%)`;
+  imgUpload.style.filter = `invert(${VALUE_EFFECTS['marvin']['max']}%)`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: valueEffects['marvin']['min'],
-      max: valueEffects['marvin']['max'],
+      min: VALUE_EFFECTS['marvin']['min'],
+      max: VALUE_EFFECTS['marvin']['max'],
     },
-    step: valueEffects['marvin']['min']
+    step: VALUE_EFFECTS['marvin']['min']
   });
-  slider.noUiSlider.set(valueEffects['marvin']['max']);
+  slider.noUiSlider.set(VALUE_EFFECTS['marvin']['max']);
 }
 
 function addPhobosEffect(){
   fobos.setAttribute('checked', 'true');
-  effectLevel.value = `${valueEffects['phobos']['max']}`;
+  effectLevel.value = `${VALUE_EFFECTS['phobos']['max']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--phobos');
-  imgUpload.style.filter = `blur(${valueEffects['phobos']['max']}px)`;
+  imgUpload.style.filter = `blur(${VALUE_EFFECTS['phobos']['max']}px)`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: valueEffects['phobos']['min'],
-      max: valueEffects['phobos']['max'],
+      min: VALUE_EFFECTS['phobos']['min'],
+      max: VALUE_EFFECTS['phobos']['max'],
     },
-    step: valueEffects['phobos']['step']
+    step: VALUE_EFFECTS['phobos']['step']
   });
-  slider.noUiSlider.set(valueEffects['phobos']['max']);
+  slider.noUiSlider.set(VALUE_EFFECTS['phobos']['max']);
 }
 
 function addHeatEffect(){
   znoy.setAttribute('checked', 'true');
-  effectLevel.value = `${valueEffects['heat']['max']}`;
+  effectLevel.value = `${VALUE_EFFECTS['heat']['max']}`;
   slider.removeAttribute('disabled');
   slider.style.display = 'block';
   imgUpload.className = '';
   imgUpload.classList.add('effects__preview--heat');
-  imgUpload.style.filter = `brightness(${valueEffects['heat']['max']})`;
+  imgUpload.style.filter = `brightness(${VALUE_EFFECTS['heat']['max']})`;
   slider.noUiSlider.updateOptions({
     range: {
-      min: valueEffects['heat']['min'],
-      max: valueEffects['heat']['max'],
+      min: VALUE_EFFECTS['heat']['min'],
+      max: VALUE_EFFECTS['heat']['max'],
     },
-    step: valueEffects['heat']['step']
+    step: VALUE_EFFECTS['heat']['step']
   });
-  slider.noUiSlider.set(valueEffects['heat']['max']);
+  slider.noUiSlider.set(VALUE_EFFECTS['heat']['max']);
 }
