@@ -34,7 +34,10 @@ function closeUpload(){
   buttonUpload.value = '';
   imgPreview.style.filter = '';
   imgPreview.className = '';
-  document.querySelector('.effects__label span[checked="true"]').removeAttribute('checked');
+  if (document.querySelector('.effects__label span[checked="true"]') !== null){
+    document.querySelector('.effects__label span[checked="true"]').removeAttribute('checked');
+    document.querySelector('.effects__radio:checked').checked = false;
+  }
   effectNone.setAttribute('checked', 'true');
   slider.setAttribute('disabled', 'true');
   slider.style.display = 'none';
