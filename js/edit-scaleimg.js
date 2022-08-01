@@ -2,31 +2,31 @@ const controlSmall = document.querySelector('.scale__control--smaller');
 const controlBig = document.querySelector('.scale__control--bigger');
 const controlValue = document.querySelector('.scale__control--value');
 const imgUpload = document.querySelector('.img-upload__preview img');
-const minScale = 0;
-const maxScale = 100;
-const stepScale = 25;
+const MIN_SCALE = 0;
+const MAX_SCALE = 100;
+const STEP_SCALE = 25;
 
 controlSmall.addEventListener('click', lowerScale);
 controlBig.addEventListener('click', addScale);
 
 function lowerScale(){
-  if (controlValue.value === `${minScale}%`){
+  if (controlValue.value === `${MIN_SCALE}%`){
     return '';
   }
   let value = controlValue.value.replace('%','');
-  value = +value - stepScale;
+  value = +value - STEP_SCALE;
   controlValue.value = `${value}%`;
-  value = value / maxScale;
+  value = value / MAX_SCALE;
   imgUpload.style.transform = `scale(${value})`;
 }
 
 function addScale(){
-  if (controlValue.value === `${maxScale}%`){
+  if (controlValue.value === `${MAX_SCALE}%`){
     return '';
   }
   let value = controlValue.value.replace('%','');
-  value = +value + stepScale;
+  value = +value + STEP_SCALE;
   controlValue.value = `${value}%`;
-  value = value / maxScale;
+  value = value / MAX_SCALE;
   imgUpload.style.transform = `scale(${value})`;
 }

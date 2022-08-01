@@ -6,7 +6,7 @@ import './edit-scaleimg.js';
 import './effects-img.js';
 
 const COUNT_OBJECT = 25;
-const timeoutDelay = 500;
+const TIMEOUT_DELAY = 500;
 const body = document.querySelector('body');
 
 fetch('https://26.javascript.pages.academy/kekstagram/data')
@@ -61,7 +61,7 @@ fetch('https://26.javascript.pages.academy/kekstagram/data')
         pictures.append(createThumbnails(arrayData));
       }
     }
-    const changeFilterDebounce = debounce(changeFilter, timeoutDelay);
+    const changeFilterDebounce = debounce(changeFilter, TIMEOUT_DELAY);
     imgFilterForm.addEventListener('click', changeFilterDebounce);
 
     pictures.onclick = function (evt) {

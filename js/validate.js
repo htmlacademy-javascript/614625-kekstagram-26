@@ -1,9 +1,12 @@
+const MAX_HASHTAG_QUANTITY = 5;
+const MAX_HESHTAG_LENGTH = 20;
+
 function validateHashTag(hashteg){
   if (hashteg === ''){
     return true;
   }
   hashteg = hashteg.split(' ');
-  if(hashteg.length>5){
+  if(hashteg.length>MAX_HASHTAG_QUANTITY){
     return 'нельзя указывать больше 5 хештегов';
   }
   const allowCharacters = /(([a-zA-Z\d]))/;
@@ -14,7 +17,7 @@ function validateHashTag(hashteg){
     if (allowCharacters.test(hashteg[i]) === false){
       return 'строка после решётки должна состоять из букв и цифр';
     }
-    if(hashteg[i].length>20){
+    if(hashteg[i].length>MAX_HESHTAG_LENGTH){
       return 'максимальная длина одного хэш-тега 20 символов';
     }
     if(hashteg[i]==='#'){

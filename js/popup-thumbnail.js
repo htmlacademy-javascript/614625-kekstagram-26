@@ -4,7 +4,7 @@ const loaderComments = bigPicture.querySelector('.social__comments-loader');
 const commentsNumber = bigPicture.querySelector('.comments-number');
 const commentsCount = bigPicture.querySelector('.comments-count');
 let popUdData = null;
-const countComment = 5;
+const COUNT_COMMENT = 5;
 
 function showPopupData(data, evt){
   evt.preventDefault();
@@ -13,16 +13,16 @@ function showPopupData(data, evt){
   const likes = bigPicture.querySelector('.likes-count');
   const socialCaption = bigPicture.querySelector('.social__caption');
 
-  if (data.comments.length>countComment){
+  if (data.comments.length>COUNT_COMMENT){
     loaderComments.classList.remove('hidden');
-    commentsNumber.innerText = `${countComment}`;
+    commentsNumber.innerText = `${COUNT_COMMENT}`;
     loaderComments.addEventListener('click', loadComments);
   } else{
     loaderComments.classList.add('hidden');
     commentsNumber.innerText = data.comments.length;
   }
 
-  const comments = data.comments.slice(0,countComment);
+  const comments = data.comments.slice(0,COUNT_COMMENT);
   comments.forEach((element) => {
     createComment(element);
   });
@@ -65,12 +65,12 @@ function createComment(data){
 function loadComments (){
   const countData = (commentsCount.innerText- commentsNumber.outerText);
   let commentsData;
-  if ((countData/countComment)>1){
-    commentsData = popUdData.comments.slice(commentsNumber.outerText,+commentsNumber.outerText + countComment);
+  if ((countData/COUNT_COMMENT)>1){
+    commentsData = popUdData.comments.slice(commentsNumber.outerText,+commentsNumber.outerText + COUNT_COMMENT);
     commentsData.forEach( (element) => {
       createComment(element);
     });
-    commentsNumber.innerText = +commentsNumber.innerText + countComment;
+    commentsNumber.innerText = +commentsNumber.innerText + COUNT_COMMENT;
   } else{
     commentsData = popUdData.comments.slice(commentsNumber.outerText,+commentsNumber.outerText + countData);
     commentsData.forEach( (element) => {
