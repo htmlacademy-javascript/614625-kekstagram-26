@@ -20,29 +20,26 @@ function onCloseEscKeydown (evt){
       return;
     }
     evt.preventDefault();
-    body.classList.remove('modal-open');
-    imgUpload.classList.add('hidden');
-    buttonUpload.value = '';
-    document.removeEventListener('keydown',onCloseEscKeydown);
-    imgPreview.style.filter = '';
-    imgPreview.className = '';
-    effectNone.setAttribute('checked', 'true');
-    slider.setAttribute('disabled', 'true');
-    slider.style.display = 'none';
+    closeUpload();
   }
 }
 
 imgUploadCancel.addEventListener('click', () => {
+  closeUpload();
+});
+
+function closeUpload(){
   body.classList.remove('modal-open');
   imgUpload.classList.add('hidden');
   buttonUpload.value = '';
-  document.removeEventListener('keydown', onCloseEscKeydown);
   imgPreview.style.filter = '';
   imgPreview.className = '';
+  document.querySelector('.effects__label span[checked="true"]').removeAttribute('checked');
   effectNone.setAttribute('checked', 'true');
   slider.setAttribute('disabled', 'true');
   slider.style.display = 'none';
-});
+  document.removeEventListener('keydown', onCloseEscKeydown);
+}
 
 buttonUpload.addEventListener('change', () => {
   body.classList.add('modal-open');
